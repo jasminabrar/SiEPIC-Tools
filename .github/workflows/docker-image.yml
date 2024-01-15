@@ -16,7 +16,7 @@ on:
     
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}/klayout
+  IMAGE_NAME: ${{ github.repository }}/siepic_klayout
 
 jobs:
   build-and-push-image:
