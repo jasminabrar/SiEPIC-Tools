@@ -45,41 +45,41 @@ jobs:
       - name: Fetch changes from main repository
         run: git fetch https://github.com/SiEPIC/SiEPIC-Tools.git master
 
-      - name: Find files that are different 
-        id: changed-files
-        run: |
+      # - name: Find files that are different 
+      #   id: changed-files
+      #   run: |
 
-          if [ "${{ github.repository }}" == "${{ env.GITHUB_REPOSITORY }}" ]; then
-            # If we are in the main repository, remove existing siepic tools & copy this siepic tools to the docker container
-            docker exec scripted_layout rm -r /root/.klayout/salt/SiEPIC-Tools
-            docker cp $GITHUB_WORKSPACE scripted_layout:/root/.klayout/salt
-          else 
-            # If we are in a forked repository or another branch, copy changed files to scripted_layout
-            changed_files=$(git diff --name-only FETCH_HEAD)
+      #     if [ "${{ github.repository }}" == "${{ env.GITHUB_REPOSITORY }}" ]; then
+      #       # If we are in the main repository, remove existing siepic tools & copy this siepic tools to the docker container
+      #       docker exec scripted_layout rm -r /root/.klayout/salt/SiEPIC-Tools
+      #       docker cp $GITHUB_WORKSPACE scripted_layout:/root/.klayout/salt
+      #     else 
+      #       # If we are in a forked repository or another branch, copy changed files to scripted_layout
+      #       changed_files=$(git diff --name-only FETCH_HEAD)
 
-            IFS=$'\n' # Set Internal Field Separator to newline to handle multiple files
+      #       IFS=$'\n' # Set Internal Field Separator to newline to handle multiple files
 
-            for file in $changed_files; do
-              # Determine the library folder based on the file path
-              folder=$(dirname "$file")
+      #       for file in $changed_files; do
+      #         # Determine the library folder based on the file path
+      #         folder=$(dirname "$file")
 
-              # Extract the last part of the path (directory name)
-              folder=$(basename "$folder")
+      #         # Extract the last part of the path (directory name)
+      #         folder=$(basename "$folder")
 
-              # Extract the filename
-              filename=$(basename "$file")
+      #         # Extract the filename
+      #         filename=$(basename "$file")
 
-              # Define the destination path in the Docker container
-              destination_path="/root/.klayout/salt/SiEPIC_Tools"
+      #         # Define the destination path in the Docker container
+      #         destination_path="/root/.klayout/salt/SiEPIC_Tools"
 
-              echo "Copy $GITHUB_WORKSPACE/$file to $destination_path/$file"
+      #         echo "Copy $GITHUB_WORKSPACE/$file to $destination_path/$file"
 
-              # Perform docker cp for each file
-              docker cp "$GITHUB_WORKSPACE/$file" scripted_layout:"$destination_path/$file"
+      #         # Perform docker cp for each file
+      #         docker cp "$GITHUB_WORKSPACE/$file" scripted_layout:"$destination_path/$file"
 
-              echo "Copied $file to $destination_path/$file"
-            done
-          fi
+      #         echo "Copied $file to $destination_path/$file"
+      #       done
+      #     fi
 
       - name: Run scripted layout inside container and capture exit code
         run: docker exec scripted_layout klayout -zz -r /root/.klayout/salt/SiEPIC_EBeam_PDK/klayout/pymacros/Example_scripted_layouts/"Example - Ring_resonator_sweep.py" || echo "KLAYOUT_EXIT_CODE=$?" >> $GITHUB_ENV
