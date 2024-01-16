@@ -19,7 +19,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          repository: ${{ github.repository_owner }}/SiEPIC_EBeam_PDK
+          repository: ${{ github.repository_owner }}/SiEPIC-Tools
           ref: ${{ github.ref }}
 
       - name: Connect to Container Registry
@@ -37,13 +37,13 @@ jobs:
       # NOTE: I am currently encountering many errors when trying to use python, can just follow same process as ebeam pdk where we copy over changed files
       
       - name: Pull siepic_klayout image
-        run: docker pull ghcr.io/jasminabrar/siepic_tools/siepic_klayout:master-latest
+        run: docker pull ghcr.io/jasminabrar/siepic-tools/siepic_klayout:master-latest
      
       - name: Run docker container from image
-        run: docker run -itd --name scripted_layout -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --security-opt label=type:container_runtime_t ghcr.io/jasminabrar/siepic_tools/siepic_klayout:master-latest
+        run: docker run -itd --name scripted_layout -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --security-opt label=type:container_runtime_t ghcr.io/jasminabrar/siepic-tools/siepic_klayout:master-latest
 
       - name: Fetch changes from main repository
-        run: git fetch https://github.com/SiEPIC/SiEPIC_Tools.git master
+        run: git fetch https://github.com/SiEPIC/SiEPIC-Tools.git master
 
       - name: Find files that are different 
         id: changed-files
@@ -51,7 +51,7 @@ jobs:
 
           if [ "${{ github.repository }}" == "${{ env.GITHUB_REPOSITORY }}" ]; then
             # If we are in the main repository, remove existing siepic tools & copy this siepic tools to the docker container
-            docker exec scripted_layout rm -r /root/.klayout/salt/SiEPIC_Tools
+            docker exec scripted_layout rm -r /root/.klayout/salt/SiEPIC-Tools
             docker cp $GITHUB_WORKSPACE scripted_layout:/root/.klayout/salt
           else 
             # If we are in a forked repository or another branch, copy changed files to scripted_layout
