@@ -72,6 +72,8 @@ jobs:
               # Define the destination path in the Docker container
               destination_path="/root/.klayout/salt/SiEPIC_Tools"
 
+              echo "Copy $GITHUB_WORKSPACE/$file to $destination_path/$file"
+
               # Perform docker cp for each file
               docker cp "$GITHUB_WORKSPACE/$file" scripted_layout:"$destination_path/$file"
 
