@@ -82,7 +82,7 @@ jobs:
       #     fi
 
       - name: Run scripted layout inside container and capture exit code
-        run: docker exec scripted_layout klayout -zz -r /root/.klayout/salt/SiEPIC_EBeam_PDK/klayout/pymacros/Example_scripted_layouts/"Example - Ring_resonator_sweep.py" || echo "KLAYOUT_EXIT_CODE=$?" >> $GITHUB_ENV
+        run: docker exec scripted_layout klayout -zz -r /root/.klayout/salt/SiEPIC_EBeam_PDK/klayout/EBeam/pymacros/Example_scripted_layouts/"Example - Ring_resonator_sweep.py" || echo "KLAYOUT_EXIT_CODE=$?" >> $GITHUB_ENV
         continue-on-error: true
   
       - name: Stop container and remove it 
