@@ -5,7 +5,7 @@
 ![Stars](https://img.shields.io/github/stars/SiEPIC/SiEPIC-Tools)
 
 
-# SiEPIC-Tools
+# SiEPIC-Tools.
 
 - <a href="http://www.siepic.ubc.ca">SiEPIC</a>-Tools - for silicon photonics layout, design, verification and circuit simulation
 - Developed by <a href="https://ca.linkedin.com/in/chrostowski">Lukas Chrostowski</a>, with contributions by: <a href="https://ca.linkedin.com/in/zeqin-lu-13a52394">Zeqin Lu</a>, <a href="https://uk.linkedin.com/in/jaspreet-jhoja-00a56b64">Jaspreet Jhoja</a>, <a href="https://www.linkedin.com/in/xu-photonics/">Xu Wang</a>, <a href="https://ca.linkedin.com/in/jonas-flückiger-92a4831">Jonas Flueckiger</a>, and <a href="https://github.com/SiEPIC/SiEPIC-Tools/graphs/contributors">others</a>.
