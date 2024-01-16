@@ -1,4 +1,4 @@
-# Test that a SiEPIC EBeam PDK scripted layout successfully runs in Klayout using SiEPIC Tools code from the repo
+# Test that a SiEPIC EBeam PDK scripted layout successfully runs in Klayout using SiEPIC Tools code from the repo.
 name: KLayout Scripted Layout Test
 
 on:
